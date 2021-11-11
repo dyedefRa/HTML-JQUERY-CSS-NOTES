@@ -1,0 +1,1 @@
+                $('#Km').validationEngine('showPrompt', 'Πρέπει να εισαγάγετε μια τιμή μικρότερη από 175.000 KM.', 'error', true)

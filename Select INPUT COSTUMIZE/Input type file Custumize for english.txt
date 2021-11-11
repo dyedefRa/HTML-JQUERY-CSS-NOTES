@@ -1,0 +1,85 @@
+                <input type="file" id="file" class="form-control" />
+
+--------------------------------------------------- 
+USTTEKI INPUTU ALTTAKIYLE DEGISTIRDIK
+
+
+-------------SEÇ---------------
+    .textButton {
+        background-color: #269abc;
+        color: white;
+        padding: 5px 10px 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+
+ <div class="inputfile-box">
+                    <input type="file" id="file" onchange='uploadFile(this)' style="display: none;">
+                    <label for="file">
+                        <span class="textButton">
+                            Choose File
+                        </span>
+                    </label>
+                    <span id="file-name">No File Selected</span>
+                </div>
+
+
+
+
+
+
+    function uploadFile(target) {
+        document.getElementById("file-name").innerHTML = target.files[0].name;
+    }
+
+
+---------------------KAYDET
+ <a class="btn btn-sm btn-success" id="btnUpload" value="Upload Excel" href="javascript:void(0)" onclick="postExcelData()">Save File</a>
+
+
+  function postExcelData() {
+        if (window.FormData !== undefined) {
+            var fileUpload = $("#file").get(0);
+            if ($("#file").get(0).files.length == 0) {
+                alert("Please upload the file");
+                return;
+            }
+
+            var files = fileUpload.files;
+            var insertedFile = files[0];
+            let fileExtenstion = insertedFile.name.split('.').pop();
+
+            if (fileExtenstion!=="xls" && fileExtenstion!=="xlsx") {
+                alert("This file type is not supported.");
+                return false;
+            }
+
+            if (insertedFile.size > 358400) {
+                alert("This file size is too large. Max Limit: 350 KB");
+                return false;
+            }
+
+            var fileData = new FormData();
+            fileData.append(insertedFile.name, insertedFile);
+
+            $.ajax({
+                url: '@Url.Content(ConfigSettings.AdminSiteUrl + "CarTradeExcelImport/SaveExcel")',
+                type: "POST",
+                contentType: false,
+                processData: false,
+                data: fileData,
+                success: function (response) {
+                    if (response.result)
+                        location.reload();
+                    else
+                        alert(response.message);
+                },
+                error: function () {
+                    alert("Something went wrong.Please contact administrator");
+                }
+            });
+        } else {
+            alert("FormData is not supported in the browser.");
+        }
+    }
