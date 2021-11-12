@@ -1,0 +1,3 @@
+    .disabledPage {
+        pointer-events: none !important;
+    }
