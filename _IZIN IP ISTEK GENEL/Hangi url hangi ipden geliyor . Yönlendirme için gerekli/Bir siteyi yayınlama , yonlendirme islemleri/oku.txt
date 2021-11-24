@@ -1,0 +1,38 @@
+AMAÇ 
+http://profilo.kuponyonetimi.com adresi çalisir durumda ve biz bu adresi xx ip li bir sunucudan yayinlayacagiz.
+
+Sunucuya
+Gerekli dosyalari attin ve iis e kurdun.
+
+kurulan sunucuya erisebbiliyorsan  ipsi :  #81.8.66.132    olsun (IP sorgulama yaparak bu asamadaki dis ip yi bulabiliyoz (galiba dis ip))
+
+-- Hosta bunu yazarak iis i konrole edebilirsin calisiyor mu diye (kendi pcnde)
+#81.8.66.132      profilo.kuponyonetimi.com
+--yada sunucu da 127.0.0.1     profilo.kuponyonetimi.com yazarak sunucuda deneyebilirsin
+
+************** IKI OLAY VAR  1.
+
+profilo.kuponyonetimi.com degistirmek istedigimiz sunucunun sahiplerine yönlendirme yapmalari gerekiyor
+ve Bizim sunucnumzda da yonlendirme yapmalari gerekiyor
+
+CMD > 
+nslookup € 
+profilo.kuponyonetimi.com  diyerek 
+hangi adresin ipsi nereye gidiyor bakabilirsin
+
+1- Deisecek sunucu ya =
+
+ Asagidaki IP’ye DNS yönlendirmesi yapar misiniz?
+81.8.66.132
+
+2-
+(Bizim sunucu yonlendirmesi icin   iç bacak ip yani   ip)
+http://Profile.kupon.yönetimi.com dan gelen isteklerin 192.168.x.x sunucusuna yönlendirilmesini rica ederim.
+buda sunucu uzerinden ipconfig den ulasabisirsin.
+
+nslookup
+ipconfig
+telnet domain port
+
+
+

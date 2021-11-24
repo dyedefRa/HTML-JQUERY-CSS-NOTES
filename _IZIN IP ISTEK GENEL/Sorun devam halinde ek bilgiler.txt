@@ -1,0 +1,18 @@
+1) 
+telnet hostname 80  
+ile portunun acik olduguna bak 
+Y�nlendirme yapilmis olabilir
+Nslookup ta sorun da olmayabilir
+Eger sunucuda IIS uzerinden calistirabiliyorsan ayni zamanda
+Host a gerekli alanlari eklediysen 
+
+��Z�M TELNET ::!:!!:!:!!
+///////////////////////////////////
+
+
+ping HOST
+
+///////////////////////////////////
+ telnet HOST port
+
+telnet 15.15.16.1 22

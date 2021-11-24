@@ -1,0 +1,8 @@
+      [HttpPost]
+        public JsonResult RecaptchaResponse(string response)
+        {
+            string SecretKey = ConfigurationManager.AppSettings["CaptchaSecretKey"];
+            string url = "https://www.google.com/recaptcha/api/siteverify?secret=" + SecretKey + "&response=" + response;
+            var Response = (new WebClient()).DownloadString(url);
+            return Json(new { Response = Response });
+        }

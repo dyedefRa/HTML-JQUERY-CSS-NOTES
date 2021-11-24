@@ -1,0 +1,87 @@
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @id = "validation-form" }))
+                        {
+                            @Html.Hidden("returnurl", AntiXss.HtmlAttributeEncode(Request.QueryString["returnUrl"]))
+                            <fieldset>
+                                <label class="block clearfix">
+                                    <span class="block input-icon input-icon-right">
+                                        @Html.TextBoxFor(model => model.UserName, new { @placeHolder = "E-Posta Adresi", autocomplete = "off", @class = "form-control validate[required]" })
+                                        <i class="icon-user"></i>
+                                    </span>
+                                </label>
+                                <label class="block clearfix">
+                                    <span class="block input-icon input-icon-right">
+                                        @Html.PasswordFor(model => model.Password, new { @placeHolder = "Şifre", autocomplete = "off", @class = "form-control validate[required]" })
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                </label>
+
+                                <div id="dvCaptcha">
+                                </div>
+                                <input type="hidden" id="hfCaptcha" />
+                                <span id="rfvCaptcha" class="error" style="display:none;color:red;">Captcha validation is required.</span>
+
+                                <div class="space"></div>
+                                <div class="clearfix">
+                                    <button type="button" id="submitBtnCaptcha" class="width-35 pull-right btn btn-sm btn-primary">
+                                        <i class="icon-key"></i>
+                                        Giriş
+                                    </button>
+                                </div>
+
+                                <div class="space-4"></div>
+                            </fieldset>
+                        }
+
+
+
+
+
+
+
+<script type="text/javascript" src="~/Assets/js/jquery-3.5.0.min.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        asyncdefer></script>
+
+<script type="text/javascript">
+           var onloadCallback = function () {
+            grecaptcha.render('dvCaptcha', {
+                'sitekey': '@ConfigurationManager.AppSettings["CaptchaSiteKey"]',
+                'callback': function (response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Account/RecaptchaResponse",
+                        data: "{response: '" + response + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            var captchaResponse = jQuery.parseJSON(r.Response);
+                            if (captchaResponse.success) {
+                                $("#hfCaptcha").val(captchaResponse.success);
+                                $("#rfvCaptcha").hide();
+                            } else {
+                                $("#hfCaptcha").val("");
+                                $("#rfvCaptcha").show();
+                                var error = captchaResponse["error-codes"][0];
+                                $("#rfvCaptcha").html("RECaptcha error. " + error);
+                            }
+                        }
+                    });
+                }
+            });
+    };
+
+    $('#submitBtnCaptcha').click(function () {
+        if ($('#validation-form').validationEngine('validate')) {
+            $("#rfvCaptcha").hide();
+            if ($("#hfCaptcha").val() == "") {
+                $("#rfvCaptcha").show();
+            }
+            else {
+                document.forms[0].submit();
+
+            }
+        }
+    });
+
+</script>

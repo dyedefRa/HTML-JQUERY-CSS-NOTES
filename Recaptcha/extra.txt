@@ -1,0 +1,13 @@
+  
+    <script>
+        function onSubmit(token) {
+            document.getElementById("frm").submit();
+        }
+    </script>
+
+
+  <input class="g-recaptcha" data-sitekey="@ConfigurationManager.AppSettings["CaptchaSiteKey"]" data-callback='onSubmit' value="Güncelle" type="submit" />
+
+
+Burasını diğeriyle bağımsız. 0 1 2 ile bağımsız.
+Button a recaptcha verdik
