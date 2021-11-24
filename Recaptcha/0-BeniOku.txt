@@ -1,5 +1,5 @@
-  <add key="CaptchaSecretKey" value="6LdfRVYdAAAAADht3XitH14hx6QT80_cc0aOeuAV" />
-    <add key="CaptchaSiteKey" value="6LdfRVYdAAAAACiTqJqO-NU6H4D3CjdqW__oiDCY" />
+  <add key="CaptchaSecretKey" value="" />
+    <add key="CaptchaSiteKey" value="" />
 
 
 
