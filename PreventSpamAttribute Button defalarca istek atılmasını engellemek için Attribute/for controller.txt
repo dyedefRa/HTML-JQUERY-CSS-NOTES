@@ -1,0 +1,10 @@
+ 
+  [ValidateAntiForgeryToken]
+        [HttpPost]
+
+[PreventSpam(DelayRequest = 10, ErrorMessage = "You can only create a widget every 60 seconds.")]
+        public override ActionResult Detail(DetailViewModel<ContentPages> model)
+        {
+
+
+}
